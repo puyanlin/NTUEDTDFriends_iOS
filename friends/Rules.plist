@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>title</key>
+	<string>國立台北教育大學數位科技設計學系含玩具與遊戲碩士班系友會組章程</string>
+	<key>date</key>
+	<string>102年10月第一次系友會訂定通過</string>
+	<key>rules</key>
+	<array>
+		<dict>
+			<key>title</key>
+			<string>壹、總則</string>
+			<key>rules</key>
+			<array>
+				<string>第一條 本會定名為「國立臺北教育大學數位科技設計學系含玩具與遊戲碩士班系友會」，以下簡稱本會。</string>
+				<string>第二條 本會以加強系友間聯繫、增進彼此情誼、交換學術研究心得與工作經驗、團結互助及服務社會並協助母系及母校發展為宗旨。</string>
+				<string>第三條 本會會址設於臺北市大安區和平東路二段134號國立台北教育大學數位科技設計學系，以下簡稱本系。</string>
+				<string>第四條 本會每年至少召開一次會員大會或聯誼會。</string>
+			</array>
+		</dict>
+		<dict>
+			<key>title</key>
+			<string>貳、會員</string>
+			<key>rules</key>
+			<array>
+				<string>第五條 系主任為本會之當然會員，國立臺北教育大學數位科技設計學系學士班、日間碩士班以及在職專班畢業者，皆為本會基本會員。</string>
+				<string>第六條 凡學術上有傑出成就或對本系有特殊貢獻者，由會員5人連署提案，經會員大會表決，1/2出席會員贊同者，得為本會榮譽會員。</string>
+			</array>
+		</dict>
+		<dict>
+			<key>title</key>
+			<string>三、組織</string>
+			<key>rules</key>
+			<array>
+				<string>第七條 本會以會員大會為最高權力機構，設會長1人，由會員大會推選，任期2年，連選得連任。會長須為本系學士班、碩士班或在職專班畢業生，對內綜理本會會務，對外代表本會。</string>
+				<string>第八條 本會設總幹事一人，由會長聘任之。總幹事負責協助會長處理日常會務，會長因故出缺時，由總幹事代理。</string>
+			</array>
+		</dict>
+		<dict>
+			<key>title</key>
+			<string>肆、職權</string>
+			<key>rules</key>
+			<array>
+				<string>第九條 本會會員大會職權：\n一、制定並修訂本會組織章程。\n二、推選會長\n三、研議相關會務\n四、其他事項</string>
+			</array>
+		</dict>
+		<dict>
+			<key>title</key>
+			<string>伍、經費</string>
+			<key>rules</key>
+			<array>
+				<string>第十條 本會經費來源採會員自由捐贈或向社會募款。</string>
+			</array>
+		</dict>
+		<dict>
+			<key>title</key>
+			<string>陸、實施及修訂</string>
+			<key>rules</key>
+			<array>
+				<string>第十一條 本組織章程經會員大會通過後實施，修訂時亦同。</string>
+			</array>
+		</dict>
+	</array>
+</dict>
+</plist>
