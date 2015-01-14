@@ -53,7 +53,7 @@
                 [imgView sd_setImageWithURL:[NSURL URLWithString:url]];
                 
                 
-                [imgView setFrame:CGRectMake(0, 100, self.view.frame.size.width-10, self.view.frame.size.height/2)];
+                [imgView setFrame:CGRectMake(5, 100, self.view.frame.size.width-10, self.view.frame.size.height/2)];
                 imgView.contentMode = UIViewContentModeScaleAspectFit;
                 
                 UIActivityIndicatorView* loadingView=[[UIActivityIndicatorView alloc] initWithFrame:CGRectMake(self.view.frame.size.width/2, self.view.frame.size.height/2-100, 20, 20)];
