@@ -729,7 +729,9 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Distribution: PU YEN LIN (S6LR7F4F24)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
@@ -740,6 +742,7 @@
 					"\"$(SRCROOT)/SDWebImage\"",
 				);
 				INFOPLIST_FILE = friends/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
@@ -748,7 +751,8 @@
 				);
 				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_NAME = "DTD Alumni";
-				SDKROOT = iphoneos8.1;
+				PROVISIONING_PROFILE = "a71d636c-57ad-46be-aa19-48a632b5e541";
+				SDKROOT = iphoneos;
 			};
 			name = Debug;
 		};
@@ -756,7 +760,9 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Distribution: PU YEN LIN (S6LR7F4F24)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
@@ -767,6 +773,7 @@
 					"\"$(SRCROOT)/SDWebImage\"",
 				);
 				INFOPLIST_FILE = friends/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
@@ -775,7 +782,8 @@
 				);
 				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_NAME = "DTD Alumni";
-				SDKROOT = iphoneos8.1;
+				PROVISIONING_PROFILE = "a71d636c-57ad-46be-aa19-48a632b5e541";
+				SDKROOT = iphoneos;
 			};
 			name = Release;
 		};
