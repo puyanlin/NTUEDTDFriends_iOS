@@ -29,6 +29,7 @@
 		CD5F93111A64F1D000C8B78E /* UIImageView+HighlightedWebCache.m in Sources */ = {isa = PBXBuildFile; fileRef = CD5F92FD1A64F1D000C8B78E /* UIImageView+HighlightedWebCache.m */; };
 		CD5F93121A64F1D000C8B78E /* UIImageView+WebCache.m in Sources */ = {isa = PBXBuildFile; fileRef = CD5F92FF1A64F1D000C8B78E /* UIImageView+WebCache.m */; };
 		CD5F93131A64F1D000C8B78E /* UIView+WebCacheOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = CD5F93011A64F1D000C8B78E /* UIView+WebCacheOperation.m */; };
+		CD755CCE1A67A6B2005F7D2A /* JobTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CD755CCD1A67A6B2005F7D2A /* JobTableViewController.m */; };
 		CD8153B51A64AC520078A5FF /* ImageIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CD8153B41A64AC520078A5FF /* ImageIO.framework */; };
 		CDADE9171A5D1FF9007BC53A /* NTUEDTD.jpg in Resources */ = {isa = PBXBuildFile; fileRef = CDADE9161A5D1FF9007BC53A /* NTUEDTD.jpg */; };
 		CDADE91A1A5D242D007BC53A /* fblogo.png in Resources */ = {isa = PBXBuildFile; fileRef = CDADE9191A5D242D007BC53A /* fblogo.png */; };
@@ -147,6 +148,8 @@
 		CD5F92FF1A64F1D000C8B78E /* UIImageView+WebCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+WebCache.m"; sourceTree = "<group>"; };
 		CD5F93001A64F1D000C8B78E /* UIView+WebCacheOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+WebCacheOperation.h"; sourceTree = "<group>"; };
 		CD5F93011A64F1D000C8B78E /* UIView+WebCacheOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+WebCacheOperation.m"; sourceTree = "<group>"; };
+		CD755CCC1A67A6B2005F7D2A /* JobTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JobTableViewController.h; sourceTree = "<group>"; };
+		CD755CCD1A67A6B2005F7D2A /* JobTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JobTableViewController.m; sourceTree = "<group>"; };
 		CD8153B41A64AC520078A5FF /* ImageIO.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ImageIO.framework; path = System/Library/Frameworks/ImageIO.framework; sourceTree = SDKROOT; };
 		CDADE9161A5D1FF9007BC53A /* NTUEDTD.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = NTUEDTD.jpg; sourceTree = "<group>"; };
 		CDADE9191A5D242D007BC53A /* fblogo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = fblogo.png; sourceTree = "<group>"; };
@@ -376,6 +379,8 @@
 				3D449FAD1A61673F000BD5A3 /* NewsTableViewController.m */,
 				3DC549521A5EFA8600FDF9B6 /* NewsDetailViewController.h */,
 				3DC549531A5EFA8600FDF9B6 /* NewsDetailViewController.m */,
+				CD755CCC1A67A6B2005F7D2A /* JobTableViewController.h */,
+				CD755CCD1A67A6B2005F7D2A /* JobTableViewController.m */,
 				CDADE91D1A5E3002007BC53A /* SignUpViewController.h */,
 				CDADE91E1A5E3002007BC53A /* SignUpViewController.m */,
 				CDADE93E1A5FCDD1007BC53A /* PhotoGalleryViewController.h */,
@@ -608,6 +613,7 @@
 				CD5F930E1A64F1D000C8B78E /* UIImage+GIF.m in Sources */,
 				CDADE9401A5FCDD1007BC53A /* PhotoGalleryViewController.m in Sources */,
 				CD5F93101A64F1D000C8B78E /* UIImage+WebP.m in Sources */,
+				CD755CCE1A67A6B2005F7D2A /* JobTableViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

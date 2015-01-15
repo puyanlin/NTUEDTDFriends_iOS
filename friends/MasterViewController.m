@@ -9,10 +9,13 @@
 #import <Parse/Parse.h>
 #import "MasterViewController.h"
 #import "NewsTableViewController.h"
+#import "JobTableViewController.h"
 #import "SignUpViewController.h"
 #import "DonationTableViewController.h"
 #import "RulesTableViewController.h"
 #import "PhotoGalleryViewController.h"
+
+#define MAINTAIN_SUPPORT_INFO @"\n歡迎各位在校學弟妹、系友協助維護、增進此系友會App。Source code已於Github上公開，Android與iOS版本並存，歡迎服務系友並添為個人履歷資歷。\n\n美術或資訊技術貢獻皆歡迎交流。"
 
 
 @interface MasterViewController ()<SKStoreProductViewControllerDelegate>
@@ -20,7 +23,8 @@
 @property (strong, nonatomic) IBOutlet UITableView *tableView;
 @property (retain,nonatomic) NSArray* arraySubject;
 @property (nonatomic,strong) NSMutableArray* arrayPhotoUrls;
-//@property (nonatomic,assign) BOOL isURLloaded;
+@property (nonatomic,assign) Boolean isVoting;
+@property (nonatomic,strong) NSString* votingTitle;
 @end
 
 @implementation MasterViewController
@@ -34,6 +38,15 @@
     self.title=@"DTD Alumni";
     
     self.arraySubject=[NSArray arrayWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"MainSubject" ofType:@"plist"]];
+    
+    [PFConfig getConfigInBackgroundWithBlock:^(PFConfig *config, NSError *error) {
+        if(!error){
+            self.isVoting=[config[@"isVoting"] boolValue];
+            self.votingTitle=config[@"votingTitle"];
+            
+            [self.tableView reloadData];
+        }
+    }];
     
 }
 -(void) viewWillAppear:(BOOL)animated{
@@ -60,11 +73,29 @@
 }
 
 #pragma mark - UITableViewDataSource
+-(NSInteger) numberOfSectionsInTableView:(UITableView *)tableView{
+    if(self.isVoting) return 2;
+    return 1;
+}
+
 -(NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return [self.arraySubject count];
+    return section==0?[self.arraySubject count]:1;
 }
 -(NSString*) tableView:(UITableView *)tableView titleForFooterInSection:(NSInteger)section{
-    return @"歡迎各位在校學弟妹、系友協助維護、增進此系友會App。Source code已於Github上公開，Android與iOS版本並存，歡迎服務系友並添為個人履歷資歷。\n\n美術或資訊技術貢獻皆歡迎交流。";
+    if(self.isVoting){
+        if(section==1)
+            return MAINTAIN_SUPPORT_INFO;
+        else
+            return nil;
+    }else{
+        return MAINTAIN_SUPPORT_INFO;
+    }
+}
+-(NSString*) tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section{
+    if(section==1){
+        return @"線上活動";
+    }
+    return nil;
 }
 
 
@@ -74,10 +105,12 @@
     
     if(cell==nil){
         cell=[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:reuseIdentifier];
-        
     }
 
-    cell.textLabel.text=[self.arraySubject objectAtIndex:indexPath.row];
+    if(indexPath.section==0) //static outline
+        cell.textLabel.text=[self.arraySubject objectAtIndex:indexPath.row];
+    else
+        cell.textLabel.text=self.votingTitle;
     cell.accessoryType=UITableViewCellAccessoryDisclosureIndicator;
     cell.selectionStyle=UITableViewCellSelectionStyleNone;
     
@@ -86,26 +119,32 @@
 #pragma mark - UITableViewDelegate
 -(void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle: nil];
-    if(indexPath.row==0){
-        NewsTableViewController* vc=[[NewsTableViewController alloc] initWithClassName:@"DTDNotification"];
-        vc.title=[self.arraySubject objectAtIndex:indexPath.row];
-        [self.navigationController pushViewController:vc animated:TRUE];
-    }else if(indexPath.row==1){
-        SignUpViewController* vc = [storyboard instantiateViewControllerWithIdentifier:@"SignUpViewController"];
-        vc.title=[self.arraySubject objectAtIndex:indexPath.row];
-        [self.navigationController pushViewController:vc animated:TRUE];
-    }else if(indexPath.row==2){
-        PhotoGalleryViewController* vc = [storyboard instantiateViewControllerWithIdentifier:@"PhotoGalleryViewController"];
-        vc.title=[self.arraySubject objectAtIndex:indexPath.row];
-        [self.navigationController pushViewController:vc animated:true];
-    }else if(indexPath.row==3){
-        DonationTableViewController* vc = [storyboard instantiateViewControllerWithIdentifier:@"DonationTableViewController"];
-        vc.title=[self.arraySubject objectAtIndex:indexPath.row];
-        [self.navigationController pushViewController:vc animated:TRUE];
-    }else if(indexPath.row==4){
-        RulesTableViewController* vc = [storyboard instantiateViewControllerWithIdentifier:@"RulesTableViewController"];
-        vc.title=[self.arraySubject objectAtIndex:indexPath.row];
-        [self.navigationController pushViewController:vc animated:TRUE];
+    if(indexPath.section==0){
+        if(indexPath.row==0){
+            NewsTableViewController* vc=[[NewsTableViewController alloc] initWithClassName:@"DTDNotification"];
+            vc.title=[self.arraySubject objectAtIndex:indexPath.row];
+            [self.navigationController pushViewController:vc animated:TRUE];
+        }else if(indexPath.row==1){
+            JobTableViewController* vc=[storyboard instantiateViewControllerWithIdentifier:@"JobTableViewController"];
+            vc.title=[self.arraySubject objectAtIndex:indexPath.row];
+            [self.navigationController pushViewController:vc animated:TRUE];
+        }else if(indexPath.row==2){
+            SignUpViewController* vc = [storyboard instantiateViewControllerWithIdentifier:@"SignUpViewController"];
+            vc.title=[self.arraySubject objectAtIndex:indexPath.row];
+            [self.navigationController pushViewController:vc animated:TRUE];
+        }else if(indexPath.row==3){
+            PhotoGalleryViewController* vc = [storyboard instantiateViewControllerWithIdentifier:@"PhotoGalleryViewController"];
+            vc.title=[self.arraySubject objectAtIndex:indexPath.row];
+            [self.navigationController pushViewController:vc animated:true];
+        }else if(indexPath.row==4){
+            DonationTableViewController* vc = [storyboard instantiateViewControllerWithIdentifier:@"DonationTableViewController"];
+            vc.title=[self.arraySubject objectAtIndex:indexPath.row];
+            [self.navigationController pushViewController:vc animated:TRUE];
+        }else if(indexPath.row==5){
+            RulesTableViewController* vc = [storyboard instantiateViewControllerWithIdentifier:@"RulesTableViewController"];
+            vc.title=[self.arraySubject objectAtIndex:indexPath.row];
+            [self.navigationController pushViewController:vc animated:TRUE];
+        }
     }
 }
 @end

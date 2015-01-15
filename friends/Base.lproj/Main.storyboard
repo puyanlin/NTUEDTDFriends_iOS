@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6254" systemVersion="14C94b" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BQf-Iu-LrC">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6254" systemVersion="14C99d" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BQf-Iu-LrC">
     <dependencies>
+        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
@@ -284,6 +285,52 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1iv-KU-Z5e" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="985" y="-332"/>
+        </scene>
+        <!--Job Table View Controller-->
+        <scene sceneID="rF9-V0-kkk">
+            <objects>
+                <viewController storyboardIdentifier="JobTableViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="icu-N2-fWU" customClass="JobTableViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="lx4-SH-diP"/>
+                        <viewControllerLayoutGuide type="bottom" id="4Il-KP-DbG"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="0Tw-iI-SxC">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" translatesAutoresizingMaskIntoConstraints="NO" id="e8I-Mg-S0b">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                                <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                <connections>
+                                    <outlet property="dataSource" destination="icu-N2-fWU" id="Ah1-PI-i7N"/>
+                                    <outlet property="delegate" destination="icu-N2-fWU" id="zHI-IZ-NMj"/>
+                                </connections>
+                            </tableView>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="sSc-Wh-Nd3">
+                                <rect key="frame" x="282" y="282" width="37" height="37"/>
+                                <color key="color" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                            </activityIndicatorView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="centerX" secondItem="e8I-Mg-S0b" secondAttribute="centerX" id="8aS-6D-qP4"/>
+                            <constraint firstAttribute="centerY" secondItem="sSc-Wh-Nd3" secondAttribute="centerY" id="DYL-mH-xhv"/>
+                            <constraint firstAttribute="centerX" secondItem="sSc-Wh-Nd3" secondAttribute="centerX" id="MGb-4g-fAg"/>
+                            <constraint firstItem="e8I-Mg-S0b" firstAttribute="leading" secondItem="0Tw-iI-SxC" secondAttribute="leadingMargin" constant="-16" id="NJ0-rQ-51S"/>
+                            <constraint firstAttribute="centerY" secondItem="e8I-Mg-S0b" secondAttribute="centerY" id="bsW-p5-RCa"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="e8I-Mg-S0b" secondAttribute="trailing" constant="-16" id="cby-Qp-IGY"/>
+                            <constraint firstItem="e8I-Mg-S0b" firstAttribute="top" secondItem="0Tw-iI-SxC" secondAttribute="topMargin" id="dqC-hd-6Iu"/>
+                            <constraint firstItem="4Il-KP-DbG" firstAttribute="top" secondItem="e8I-Mg-S0b" secondAttribute="bottom" id="oXq-vm-JuG"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="loadingIndicator" destination="sSc-Wh-Nd3" id="Aci-fR-n3Q"/>
+                        <outlet property="tableView" destination="e8I-Mg-S0b" id="kAY-7F-dUI"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="CVd-C5-kn2" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="316" y="40"/>
         </scene>
     </scenes>
     <resources>

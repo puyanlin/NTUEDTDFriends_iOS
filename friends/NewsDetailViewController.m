@@ -27,6 +27,8 @@
     [btnLayer setCornerRadius:10.0f];
     [btnLayer setBorderColor:[UIColor blackColor].CGColor];
     
+    [self.btnLink setHidden:!self.pfObj[@"link"]];
+    
 }
 -(void) viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
