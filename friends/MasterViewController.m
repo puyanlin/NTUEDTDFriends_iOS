@@ -15,6 +15,8 @@
 #import "RulesTableViewController.h"
 #import "PhotoGalleryViewController.h"
 
+#import "VotingInformationTableViewController.h"
+
 #define MAINTAIN_SUPPORT_INFO @"\n歡迎各位在校學弟妹、系友協助維護、增進此系友會App。Source code已於Github上公開，Android與iOS版本並存，歡迎服務系友並添為個人履歷資歷。\n\n美術或資訊技術貢獻皆歡迎交流。"
 
 
@@ -42,6 +44,7 @@
     [PFConfig getConfigInBackgroundWithBlock:^(PFConfig *config, NSError *error) {
         if(!error){
             self.isVoting=[config[@"isVoting"] boolValue];
+            
             self.votingTitle=config[@"votingTitle"];
             
             [self.tableView reloadData];
@@ -145,6 +148,10 @@
             vc.title=[self.arraySubject objectAtIndex:indexPath.row];
             [self.navigationController pushViewController:vc animated:TRUE];
         }
+    }else{
+        VotingInformationTableViewController* vc = [storyboard instantiateViewControllerWithIdentifier:@"VotingInformationTableViewController"];
+        vc.title=self.votingTitle;
+        [self.navigationController pushViewController:vc animated:TRUE];
     }
 }
 @end

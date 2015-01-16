@@ -147,7 +147,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4vo-E4-a26" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="985.5" y="342.75"/>
+            <point key="canvasLocation" x="985" y="1006"/>
         </scene>
         <!--Rules Table View Controller-->
         <scene sceneID="XNL-fo-A3j">
@@ -165,7 +165,51 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="CPu-X2-9sF" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="985" y="2358"/>
+            <point key="canvasLocation" x="985" y="2334"/>
+        </scene>
+        <!--Voting Information Table View Controller-->
+        <scene sceneID="h7U-cV-tSH">
+            <objects>
+                <viewController storyboardIdentifier="VotingInformationTableViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="waf-iK-DD5" customClass="VotingInformationTableViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="XjV-np-73r"/>
+                        <viewControllerLayoutGuide type="bottom" id="OTi-q9-4gS"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="H3U-eB-2ad">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" scrollEnabled="NO" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" translatesAutoresizingMaskIntoConstraints="NO" id="GM9-wD-AA5">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                                <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                <connections>
+                                    <outlet property="dataSource" destination="waf-iK-DD5" id="xMf-oK-Nj2"/>
+                                    <outlet property="delegate" destination="waf-iK-DD5" id="TZo-Kh-3cQ"/>
+                                </connections>
+                            </tableView>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="riB-oB-vi6">
+                                <rect key="frame" x="282" y="140" width="37" height="37"/>
+                                <color key="color" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                            </activityIndicatorView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="OTi-q9-4gS" firstAttribute="top" secondItem="GM9-wD-AA5" secondAttribute="bottom" id="AiN-tH-6AP"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="GM9-wD-AA5" secondAttribute="trailing" constant="-16" id="GFA-b4-WH1"/>
+                            <constraint firstItem="riB-oB-vi6" firstAttribute="top" secondItem="H3U-eB-2ad" secondAttribute="topMargin" constant="140" id="aSw-Is-fj8"/>
+                            <constraint firstItem="GM9-wD-AA5" firstAttribute="top" secondItem="H3U-eB-2ad" secondAttribute="topMargin" id="axX-RA-0Yh"/>
+                            <constraint firstAttribute="centerX" secondItem="riB-oB-vi6" secondAttribute="centerX" id="m6s-LA-6pu"/>
+                            <constraint firstItem="GM9-wD-AA5" firstAttribute="leading" secondItem="H3U-eB-2ad" secondAttribute="leadingMargin" constant="-16" id="oH5-mJ-dQ3"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="loadingIndicator" destination="riB-oB-vi6" id="hH9-hS-RTS"/>
+                        <outlet property="tableView" destination="GM9-wD-AA5" id="Huy-Qk-9qR"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="739-XP-QSL" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="985" y="3004"/>
         </scene>
         <!--Photo Gallery View Controller-->
         <scene sceneID="d7L-fc-9kj">
@@ -330,7 +374,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="CVd-C5-kn2" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="316" y="40"/>
+            <point key="canvasLocation" x="985" y="328"/>
         </scene>
     </scenes>
     <resources>
