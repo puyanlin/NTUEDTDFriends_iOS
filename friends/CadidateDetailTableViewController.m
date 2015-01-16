@@ -7,9 +7,11 @@
 //
 
 #import "CadidateDetailTableViewController.h"
+#import "UIImageView+WebCache.h"
 
 @interface CadidateDetailTableViewController ()
-
+@property (nonatomic,strong) NSArray* arrayExperience;
+@property (nonatomic,retain) NSArray* arrayPolitics;
 @end
 
 @implementation CadidateDetailTableViewController
@@ -26,6 +28,9 @@
     [self.tableView registerClass: [UITableViewCell class] forCellReuseIdentifier:@"CandiCellInfo"];
     [self.tableView registerClass: [UITableViewCell class] forCellReuseIdentifier:@"CandiCellExp"];
     [self.tableView registerClass: [UITableViewCell class] forCellReuseIdentifier:@"CandiCellPoli"];
+    
+    self.arrayExperience=self.cadidateObj[@"Experience"];
+    self.arrayPolitics=self.cadidateObj[@"Politics"];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -35,6 +40,26 @@
 
 #pragma mark - Table view data source
 
+-(UIView*) tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
+    if(section==0){
+        UIImageView *headIcon=[[UIImageView alloc] initWithFrame:CGRectMake(self.tableView.frame.size.width/2-75, 5, 150, 150)];
+        UIView* headerView=[[UIView alloc] initWithFrame:CGRectMake(0, 0, self.tableView.frame.size.width, 160)];
+        
+        [headIcon sd_setImageWithURL:[NSURL URLWithString:self.cadidateObj[@"ImageUrl"]]];
+        
+        headIcon.contentMode = UIViewContentModeScaleAspectFit;
+        
+        [headerView addSubview:headIcon];
+    
+        return headerView;
+    }
+    return nil;
+}
+-(CGFloat) tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
+    if(section==0) return 160;
+    return 20;
+}
+
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
 
     return 4;
@@ -43,7 +68,8 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     if(section==0) return 0;
     if(section==1) return 1;
-    return 3;
+    if(section==2) return [self.arrayExperience count];
+    else return [self.arrayPolitics count];
 }
 
 -(NSString*) tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section{
@@ -67,15 +93,10 @@
     
     if(indexPath.section==1){
         static NSString* reuseIdentifier=@"CandiCellInfo";
-        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:reuseIdentifier forIndexPath:indexPath];
-        
-        if(cell==nil){
-            cell=[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:reuseIdentifier];
-        }
+        UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:reuseIdentifier];
         
         cell.textLabel.text=self.cadidateObj[@"Class"];
-        cell.detailTextLabel.text=self.cadidateObj[@"Grade"];
-        cell.selectionStyle=UITableViewCellSelectionStyleNone;
+        cell.detailTextLabel.text=[NSString stringWithFormat:@"%@級",self.cadidateObj[@"Grade"]];
         
         return cell;
     }else if(indexPath.section==2){
@@ -86,70 +107,25 @@
             cell=[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:reuseIdentifier];
         }
         
-        
+        cell.textLabel.text=[self.arrayExperience objectAtIndex:indexPath.row];
         cell.selectionStyle=UITableViewCellSelectionStyleNone;
         
         return cell;
     }else{
-        //if(indexPath.section==0){
-            static NSString* reuseIdentifier=@"CandiCellPoli";
-            UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:reuseIdentifier forIndexPath:indexPath];
-            
-            if(cell==nil){
-                cell=[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:reuseIdentifier];
-            }
-            
-            
-            cell.selectionStyle=UITableViewCellSelectionStyleNone;
-            
-            return cell;
-        //}
+        
+        static NSString* reuseIdentifier=@"CandiCellPoli";
+        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:reuseIdentifier forIndexPath:indexPath];
+        
+        if(cell==nil){
+            cell=[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:reuseIdentifier];
+        }
+        
+        cell.textLabel.text=[self.arrayPolitics objectAtIndex:indexPath.row];
+        cell.selectionStyle=UITableViewCellSelectionStyleNone;
+        
+        return cell;
     }
 }
 
-
-/*
-// Override to support conditional editing of the table view.
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Return NO if you do not want the specified item to be editable.
-    return YES;
-}
-*/
-
-/*
-// Override to support editing the table view.
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        // Delete the row from the data source
-        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    } else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }   
-}
-*/
-
-/*
-// Override to support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath {
-}
-*/
-
-/*
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
-}
-*/
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end
