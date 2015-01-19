@@ -13,6 +13,8 @@
 #warning before run this project,you should assign PARSE ApplicationID and Client KEY
 #define PARSE_APPLICATIONID @""
 #define PARSE_CLIENTKEY @""
+#define GAI_TRACKERID       @""
+
 
 @interface AppDelegate ()
 
@@ -44,7 +46,7 @@
     [[[GAI sharedInstance] logger] setLogLevel:kGAILogLevelVerbose];
     
     // Initialize tracker. Replace with your tracking ID.
-    [[GAI sharedInstance] trackerWithTrackingId:@"UA-42969102-2"];
+    [[GAI sharedInstance] trackerWithTrackingId:GAI_TRACKERID];
     
     return YES;
 }

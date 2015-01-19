@@ -45,6 +45,8 @@
         if(!error){
             self.isVoting=[config[@"isVoting"] boolValue];
             
+            //self.isVoting=TRUE;
+            
             self.votingTitle=config[@"votingTitle"];
             
             [self.tableView reloadData];
