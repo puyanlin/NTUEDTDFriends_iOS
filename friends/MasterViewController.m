@@ -45,6 +45,7 @@
         if(!error){
             self.isVoting=[config[@"isVoting"] boolValue];
             
+            //for voting debug,force isVoting be true
             //self.isVoting=TRUE;
             
             self.votingTitle=config[@"votingTitle"];
