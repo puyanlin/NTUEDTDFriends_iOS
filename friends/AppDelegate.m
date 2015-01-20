@@ -15,7 +15,6 @@
 #define PARSE_CLIENTKEY     @""
 #define GAI_TRACKERID       @""
 
-
 @interface AppDelegate ()
 
 @end

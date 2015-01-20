@@ -12,6 +12,10 @@
 		3DC549611A60580300FDF9B6 /* libGoogleAnalyticsServices.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3DC549601A60580300FDF9B6 /* libGoogleAnalyticsServices.a */; };
 		3DC549631A60583B00FDF9B6 /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3DC549621A60583B00FDF9B6 /* AdSupport.framework */; };
 		3DC549651A60584A00FDF9B6 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3DC549641A60584A00FDF9B6 /* CoreData.framework */; };
+		CD4162AB1A6E25CD009A48B9 /* CenterColorableTextCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CD4162A91A6E25CD009A48B9 /* CenterColorableTextCell.m */; };
+		CD4162AC1A6E25CD009A48B9 /* CenterColorableTextCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CD4162AA1A6E25CD009A48B9 /* CenterColorableTextCell.xib */; };
+		CD4162B41A6E2A0F009A48B9 /* VoteValidationCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CD4162B21A6E2A0F009A48B9 /* VoteValidationCell.m */; };
+		CD4162B51A6E2A0F009A48B9 /* VoteValidationCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CD4162B31A6E2A0F009A48B9 /* VoteValidationCell.xib */; };
 		CD5F92DB1A64EEC600C8B78E /* libSDWebImage.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CD5EBB6B1A64CCFD00E41B1E /* libSDWebImage.a */; };
 		CD5F93041A64F1D000C8B78E /* SDWebImageCompat.m in Sources */ = {isa = PBXBuildFile; fileRef = CD5F92DF1A64F1D000C8B78E /* SDWebImageCompat.m */; };
 		CD5F93051A64F1D000C8B78E /* SDWebImageDownloader.m in Sources */ = {isa = PBXBuildFile; fileRef = CD5F92E21A64F1D000C8B78E /* SDWebImageDownloader.m */; };
@@ -120,6 +124,12 @@
 		3DC549671A605A0600FDF9B6 /* GAIEcommerceProduct.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAIEcommerceProduct.h; sourceTree = "<group>"; };
 		3DC549681A605A0600FDF9B6 /* GAIEcommerceProductAction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAIEcommerceProductAction.h; sourceTree = "<group>"; };
 		3DC549691A605A0600FDF9B6 /* GAIEcommercePromotion.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAIEcommercePromotion.h; sourceTree = "<group>"; };
+		CD4162A81A6E25CD009A48B9 /* CenterColorableTextCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CenterColorableTextCell.h; sourceTree = "<group>"; };
+		CD4162A91A6E25CD009A48B9 /* CenterColorableTextCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CenterColorableTextCell.m; sourceTree = "<group>"; };
+		CD4162AA1A6E25CD009A48B9 /* CenterColorableTextCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CenterColorableTextCell.xib; sourceTree = "<group>"; };
+		CD4162B11A6E2A0F009A48B9 /* VoteValidationCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VoteValidationCell.h; sourceTree = "<group>"; };
+		CD4162B21A6E2A0F009A48B9 /* VoteValidationCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VoteValidationCell.m; sourceTree = "<group>"; };
+		CD4162B31A6E2A0F009A48B9 /* VoteValidationCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = VoteValidationCell.xib; sourceTree = "<group>"; };
 		CD5EBB631A64CCFD00E41B1E /* SDWebImage.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = SDWebImage.xcodeproj; path = SDWebImage/SDWebImage.xcodeproj; sourceTree = "<group>"; };
 		CD5F92DE1A64F1D000C8B78E /* SDWebImageCompat.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDWebImageCompat.h; sourceTree = "<group>"; };
 		CD5F92DF1A64F1D000C8B78E /* SDWebImageCompat.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDWebImageCompat.m; sourceTree = "<group>"; };
@@ -414,6 +424,12 @@
 				CDB56EE51A6D0599005DB043 /* VotingTableViewController.m */,
 				CDB56EEE1A6D0A29005DB043 /* CandidateTableViewCell.h */,
 				CDB56EEF1A6D0A29005DB043 /* CandidateTableViewCell.m */,
+				CD4162A81A6E25CD009A48B9 /* CenterColorableTextCell.h */,
+				CD4162A91A6E25CD009A48B9 /* CenterColorableTextCell.m */,
+				CD4162B11A6E2A0F009A48B9 /* VoteValidationCell.h */,
+				CD4162B21A6E2A0F009A48B9 /* VoteValidationCell.m */,
+				CD4162B31A6E2A0F009A48B9 /* VoteValidationCell.xib */,
+				CD4162AA1A6E25CD009A48B9 /* CenterColorableTextCell.xib */,
 				CDB56EF01A6D0A29005DB043 /* CandidateTableViewCell.xib */,
 				CDBC90831A5CCA4F00B04996 /* Main.storyboard */,
 				CDBC90881A5CCA4F00B04996 /* LaunchScreen.xib */,
@@ -589,6 +605,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CD4162B51A6E2A0F009A48B9 /* VoteValidationCell.xib in Resources */,
 				CDADE9261A5E3824007BC53A /* Rules.plist in Resources */,
 				CDB56EF41A6D0BCE005DB043 /* votingInk.png in Resources */,
 				CDBC90851A5CCA4F00B04996 /* Main.storyboard in Resources */,
@@ -599,6 +616,7 @@
 				CDBC908A1A5CCA4F00B04996 /* LaunchScreen.xib in Resources */,
 				CDADE9171A5D1FF9007BC53A /* NTUEDTD.jpg in Resources */,
 				CDBC90871A5CCA4F00B04996 /* Images.xcassets in Resources */,
+				CD4162AC1A6E25CD009A48B9 /* CenterColorableTextCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -623,6 +641,7 @@
 				CD5F93081A64F1D000C8B78E /* SDWebImageManager.m in Sources */,
 				CDADE9291A5E5FEA007BC53A /* RulesTableViewController.m in Sources */,
 				CD5F930C1A64F1D000C8B78E /* NSData+ImageContentType.m in Sources */,
+				CD4162AB1A6E25CD009A48B9 /* CenterColorableTextCell.m in Sources */,
 				CD755CDB1A690FD0005F7D2A /* CadidateDetailTableViewController.m in Sources */,
 				CDBC907F1A5CCA4F00B04996 /* AppDelegate.m in Sources */,
 				CDB56EE61A6D0599005DB043 /* VotingTableViewController.m in Sources */,
@@ -639,6 +658,7 @@
 				CDBC907C1A5CCA4F00B04996 /* main.m in Sources */,
 				CD5F93041A64F1D000C8B78E /* SDWebImageCompat.m in Sources */,
 				CD5F93071A64F1D000C8B78E /* SDImageCache.m in Sources */,
+				CD4162B41A6E2A0F009A48B9 /* VoteValidationCell.m in Sources */,
 				CD5F930B1A64F1D000C8B78E /* MKAnnotationView+WebCache.m in Sources */,
 				CDADE92C1A5E753B007BC53A /* DonationTableViewController.m in Sources */,
 				CD5F930E1A64F1D000C8B78E /* UIImage+GIF.m in Sources */,

@@ -9,8 +9,9 @@
 #import <UIKit/UIKit.h>
 
 #define CIRCLE_NUMERS @[@"①",@"②",@"③",@"④",@"⑤",@"⑥",@"⑦",@"⑧",@"⑨"]
+#define VotedKey @"Voted"
 
-@interface VotingTableViewController : UITableViewController
+@interface VotingTableViewController : UITableViewController<UITextFieldDelegate,UIAlertViewDelegate>
 
 @property (nonatomic,retain) NSArray* arrayCandidates;
 

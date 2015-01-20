@@ -29,7 +29,7 @@
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
     
     [self.tableView registerClass: [UITableViewCell class] forCellReuseIdentifier:@"CandiCell"];
-    
+
 }
 
 - (void)didReceiveMemoryWarning {

@@ -10,8 +10,6 @@
 #import "GAI.h"
 #import "CadidateDetailTableViewController.h"
 
-#define VotedKey @"Voted"
-
 @interface VotingInformationTableViewController : GAITrackedViewController<UITableViewDataSource,UITableViewDelegate>
 
 @end

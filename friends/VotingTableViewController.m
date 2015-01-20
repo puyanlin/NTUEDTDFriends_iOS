@@ -8,23 +8,35 @@
 
 #import "VotingTableViewController.h"
 #import "CandidateTableViewCell.h"
+#import "CenterColorableTextCell.h"
+#import "VoteValidationCell.h"
 #import <Parse/Parse.h>
 
-#define UNSELECT_ANYONE -1
+#define UNSELECT_ANYONE 25535
 
 @interface VotingTableViewController ()
 
 @property (nonatomic,assign) NSInteger selectIndex;
+@property (nonatomic,strong) PFObject* mTicket;
+@property (nonatomic,assign) ValidState validState;
+@property (nonatomic,retain) NSString* typedSerial;
+
+@property (nonatomic,assign) BOOL isVoting;
 
 @end
 
 @implementation VotingTableViewController
 @synthesize selectIndex;
+@synthesize mTicket;
+@synthesize validState;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     
     [self.tableView registerNib:[UINib nibWithNibName:@"CandidateTableViewCell" bundle:nil] forCellReuseIdentifier:@"CandidateTableViewCell"];
+    [self.tableView registerNib:[UINib nibWithNibName:@"CenterColorableTextCell" bundle:nil] forCellReuseIdentifier:@"CenterColorableTextCell"];
+    [self.tableView registerNib:[UINib nibWithNibName:@"VoteValidationCell" bundle:nil] forCellReuseIdentifier:@"VoteValidationCell"];
+    
     [self.tableView registerClass: [UITableViewCell class] forCellReuseIdentifier:@"ResetCell"];
 
     // Uncomment the following line to preserve selection between presentations.
@@ -44,7 +56,7 @@
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 3;
+    return validState==stateCorrect?4:3;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -56,10 +68,20 @@
 
 -(NSString*) tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section{
     if(section==0)
-        return @"請直接點選您支持的會長候選人，點按後將出現選舉章，送出投票前您都可以隨時修改您的選擇";
+        return @"請直接點選您支持的會長候選人，點按後將出現選舉章，送出投票前您都可以隨時修改您的選擇。";
+    if(section==2) return @"投票序號";
     return nil;
 }
 
+-(NSString*) tableView:(UITableView *)tableView titleForFooterInSection:(NSInteger)section{
+    if(section==1)
+        return @"點選清除選擇可取消目前所有選擇，沒有選擇任何候選人的選票投出後將成為廢票。";
+    return nil;
+}
+
+-(CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+    return 50;
+}
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     if(indexPath.section==0){
@@ -72,23 +94,59 @@
         [cell.imgVoting setHidden:indexPath.row!=selectIndex];
         
         return cell;
-    }else{
-        static NSString* reuseIdentifier=@"ResetCell";
-        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:reuseIdentifier forIndexPath:indexPath];
+    }else if(indexPath.section==1||indexPath.section==3){
+        static NSString* reuseIdentifier=@"CenterColorableTextCell";
+        CenterColorableTextCell *cell = [tableView dequeueReusableCellWithIdentifier:reuseIdentifier];
+        cell.lblText.text=indexPath.section==1?@"清除選擇":@"投票";
         
-        if(cell==nil){
-            cell=[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:reuseIdentifier];
+        if(indexPath.section!=1){
+            [cell.lblText setTextColor:[UIColor redColor]];
+            CALayer *btnLayer = [cell.lblText layer];
+            [btnLayer setBorderWidth:2.0f];
+            [btnLayer setMasksToBounds:YES];
+            [btnLayer setCornerRadius:10.0f];
+            [btnLayer setBorderColor:[UIColor redColor].CGColor];
+            
+            [cell.votingIndicator setHidden:!self.isVoting];
         }
-        cell.textLabel.text=indexPath.section==1?@"清除選擇":@"投票";
         
+        return cell;
+    }else{
+        static NSString* reuseIdentifier=@"VoteValidationCell";
+        VoteValidationCell *cell = [tableView dequeueReusableCellWithIdentifier:reuseIdentifier];
+        cell.txtfieldSeriel.delegate=self;
+        cell.accessoryType=UITableViewCellAccessoryNone;
+        [cell.indicatorCheckSerial setHidden:TRUE];
+        [cell.txtfieldSeriel setTextColor:[UIColor blackColor]];
+        [cell.txtfieldSeriel setText:self.typedSerial];
         
-        cell.selectionStyle=UITableViewCellSelectionStyleNone;
+        [cell.txtfieldSeriel addTarget:self
+                                     action:@selector(textFieldDidChange:)
+                           forControlEvents:UIControlEventEditingChanged];
+        
+        switch (validState) {
+            case stateChecking:
+                [cell.indicatorCheckSerial setHidden:FALSE];
+                break;
+            case stateCorrect:
+                cell.accessoryType=UITableViewCellAccessoryCheckmark;
+                [cell.txtfieldSeriel setTextColor:[UIColor greenColor]];
+                [cell.txtfieldSeriel setEnabled:FALSE];
+                break;
+            case stateError:
+                [cell.txtfieldSeriel setTextColor:[UIColor redColor]];
+                break;
+            case stateNormal:
+            default:
+                break;
+        }
         
         return cell;
     }
 }
 
 -(void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    if(self.isVoting) return;
     if(indexPath.section==0){
         selectIndex=indexPath.row;
         [tableView reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationAutomatic];
@@ -97,51 +155,69 @@
         selectIndex=UNSELECT_ANYONE;
         [tableView reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationAutomatic];
     }
+    if(indexPath.section==3){
+        self.isVoting=TRUE;
+        [tableView reloadSections:[NSIndexSet indexSetWithIndex:3] withRowAnimation:UITableViewRowAnimationAutomatic];
+        [mTicket setObject:[NSNumber numberWithInteger:selectIndex+1] forKey:@"selectNum"];//+1 for human read
+        [mTicket saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+            if(succeeded){
+                [self.navigationController popViewControllerAnimated:TRUE];
+                
+                [[NSUserDefaults standardUserDefaults] setBool:TRUE forKey:VotedKey];
+                [[NSUserDefaults standardUserDefaults] synchronize];
+            }
+        }];
+    }
 }
 
 
-/*
-// Override to support conditional editing of the table view.
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Return NO if you do not want the specified item to be editable.
-    return YES;
+#pragma mark - UITextFieldDelegate
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField{
+    
+    validState=stateChecking;
+    
+    [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:2] withRowAnimation:UITableViewRowAnimationAutomatic];
+    
+    PFQuery* validQuery=[PFQuery queryWithClassName:@"DTDMajorVoting"];
+    [validQuery whereKey:@"objectId" equalTo:self.typedSerial];
+    [validQuery findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+        if(!error&&[objects count]){
+            mTicket=[objects firstObject];
+            validState=stateCorrect;
+            
+            if([mTicket[@"selectNum"] integerValue]>0){ //had voted
+                
+                PFObject* obj=[self.arrayCandidates objectAtIndex:[mTicket[@"selectNum"] integerValue]-1];
+                NSString* candidate=[NSString stringWithFormat:@"%@ %@",[CIRCLE_NUMERS objectAtIndex:[obj[@"Number"] intValue]],obj[@"Name"]];
+                
+                UIAlertView* alertView=[[UIAlertView alloc] initWithTitle:@"您已經投過票了" message:[NSString stringWithFormat:@"您已投給 %@，謝謝您",candidate] delegate:self cancelButtonTitle:@"好" otherButtonTitles:nil, nil];
+                [alertView show];
+                [[NSUserDefaults standardUserDefaults] setBool:TRUE forKey:VotedKey];
+                [[NSUserDefaults standardUserDefaults] synchronize];
+            }else{
+                [self.tableView reloadData];
+            }
+        }else{
+            validState=stateError;
+            [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:2] withRowAnimation:UITableViewRowAnimationAutomatic];
+        }
+        
+    }];
+    
+    return [textField resignFirstResponder];
 }
-*/
 
-/*
-// Override to support editing the table view.
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        // Delete the row from the data source
-        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    } else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }   
+-(void) textFieldDidChange:(UITextField*) textfield{
+    self.typedSerial=textfield.text;
+    if(validState==stateError){
+        validState=stateNormal;
+        [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:2] withRowAnimation:UITableViewRowAnimationAutomatic];
+    }
 }
-*/
 
-/*
-// Override to support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath {
+#pragma mark - UIAlertViewDelegate
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
+    [self.navigationController popViewControllerAnimated:TRUE];
 }
-*/
-
-/*
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
-}
-*/
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
-
 @end
