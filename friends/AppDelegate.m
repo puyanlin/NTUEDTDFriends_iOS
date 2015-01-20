@@ -10,7 +10,7 @@
 #import <Parse/Parse.h>
 #import "GAI.h"
 
-//#warning before run this project,you should assign PARSE ApplicationID and Client KEY
+#warning before run this project,you should assign PARSE ApplicationID and Client KEY
 #define PARSE_APPLICATIONID @""
 #define PARSE_CLIENTKEY     @""
 #define GAI_TRACKERID       @""
