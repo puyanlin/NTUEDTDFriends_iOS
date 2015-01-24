@@ -811,6 +811,7 @@
 				PRODUCT_NAME = "DTD Alumni";
 				PROVISIONING_PROFILE = "a71d636c-57ad-46be-aa19-48a632b5e541";
 				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
@@ -842,6 +843,7 @@
 				PRODUCT_NAME = "DTD Alumni";
 				PROVISIONING_PROFILE = "a71d636c-57ad-46be-aa19-48a632b5e541";
 				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
 		};

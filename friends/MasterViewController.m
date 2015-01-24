@@ -14,10 +14,9 @@
 #import "DonationTableViewController.h"
 #import "RulesTableViewController.h"
 #import "PhotoGalleryViewController.h"
-
 #import "VotingInformationTableViewController.h"
 
-#define MAINTAIN_SUPPORT_INFO @"\n歡迎各位在校學弟妹、系友協助維護、增進此系友會App。Source code已於Github上公開，Android與iOS版本並存，歡迎服務系友並添為個人履歷資歷。\n\n美術或資訊技術貢獻皆歡迎交流。"
+#define MAINTAIN_SUPPORT_INFO @"\n歡迎各位在校學弟妹、系友協助維護、增進此系友會App。Source code已公開，歡迎服務系友並添為個人履歷資歷。\n\n美術或資訊技術貢獻皆歡迎交流。"
 
 
 @interface MasterViewController ()<SKStoreProductViewControllerDelegate>
@@ -27,6 +26,7 @@
 @property (nonatomic,strong) NSMutableArray* arrayPhotoUrls;
 @property (nonatomic,assign) Boolean isVoting;
 @property (nonatomic,strong) NSString* votingTitle;
+@property (nonatomic,assign) BOOL voteEnding;
 @end
 
 @implementation MasterViewController
@@ -80,8 +80,8 @@
 
 #pragma mark - UITableViewDataSource
 -(NSInteger) numberOfSectionsInTableView:(UITableView *)tableView{
-    if(self.isVoting) return 2;
-    return 1;
+    if(self.isVoting) return 3;
+    return 2;
 }
 
 -(NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
@@ -89,17 +89,20 @@
 }
 -(NSString*) tableView:(UITableView *)tableView titleForFooterInSection:(NSInteger)section{
     if(self.isVoting){
+        if(section==2)
+            return MAINTAIN_SUPPORT_INFO;
+    }else{
         if(section==1)
             return MAINTAIN_SUPPORT_INFO;
-        else
-            return nil;
-    }else{
-        return MAINTAIN_SUPPORT_INFO;
     }
+    return nil;
 }
 -(NSString*) tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section{
-    if(section==1){
-        return @"線上活動";
+
+    if(self.isVoting){
+        if(section==1){
+            return @"線上活動";
+        }
     }
     return nil;
 }
@@ -115,8 +118,11 @@
 
     if(indexPath.section==0) //static outline
         cell.textLabel.text=[self.arraySubject objectAtIndex:indexPath.row];
-    else
-        cell.textLabel.text=self.votingTitle;
+    else{
+        cell.textLabel.text=@"前往國立臺北教育大學校友會";
+        if(self.isVoting&&indexPath.section==1)
+            cell.textLabel.text=self.votingTitle;
+    }
     cell.accessoryType=UITableViewCellAccessoryDisclosureIndicator;
     cell.selectionStyle=UITableViewCellSelectionStyleNone;
     
@@ -143,18 +149,23 @@
             vc.title=[self.arraySubject objectAtIndex:indexPath.row];
             [self.navigationController pushViewController:vc animated:true];
         }else if(indexPath.row==4){
-            DonationTableViewController* vc = [storyboard instantiateViewControllerWithIdentifier:@"DonationTableViewController"];
+            RulesTableViewController* vc = [storyboard instantiateViewControllerWithIdentifier:@"RulesTableViewController"];
             vc.title=[self.arraySubject objectAtIndex:indexPath.row];
             [self.navigationController pushViewController:vc animated:TRUE];
-        }else if(indexPath.row==5){
-            RulesTableViewController* vc = [storyboard instantiateViewControllerWithIdentifier:@"RulesTableViewController"];
+        }else{ //cancel here
+            DonationTableViewController* vc = [storyboard instantiateViewControllerWithIdentifier:@"DonationTableViewController"];
             vc.title=[self.arraySubject objectAtIndex:indexPath.row];
             [self.navigationController pushViewController:vc animated:TRUE];
         }
     }else{
-        VotingInformationTableViewController* vc = [storyboard instantiateViewControllerWithIdentifier:@"VotingInformationTableViewController"];
-        vc.title=self.votingTitle;
-        [self.navigationController pushViewController:vc animated:TRUE];
+        if(self.isVoting&&indexPath.section==1){
+            VotingInformationTableViewController* vc = [storyboard instantiateViewControllerWithIdentifier:@"VotingInformationTableViewController"];
+            vc.title=self.votingTitle;
+            [self.navigationController pushViewController:vc animated:TRUE];
+        }else{
+            NSURL *urlApp = [NSURL URLWithString:@"http://alumnus.ntue.edu.tw/donation2.php"];
+            [[UIApplication sharedApplication] openURL:urlApp];
+        }
     }
 }
 @end
