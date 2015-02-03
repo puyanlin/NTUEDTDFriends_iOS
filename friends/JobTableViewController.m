@@ -70,6 +70,53 @@
                     [self.arrayOtherjobs addObject:op];
                 }
             }
+            [self.arrayCSjobs sortUsingComparator:^NSComparisonResult(PFObject* obj1, PFObject* obj2) {
+                NSDate* date1=obj1[@"postedDate"];
+                NSDate* date2=obj2[@"postedDate"];
+                
+                if([date1 compare:date2]==NSOrderedAscending) return NSOrderedDescending;
+                else if([date1 compare:date2]==NSOrderedDescending) return NSOrderedAscending;
+                
+                return NSOrderedSame;
+            }];
+            [self.arrayDesignjobs sortUsingComparator:^NSComparisonResult(PFObject* obj1, PFObject* obj2) {
+                NSDate* date1=obj1[@"postedDate"];
+                NSDate* date2=obj2[@"postedDate"];
+                
+                if([date1 compare:date2]==NSOrderedAscending) return NSOrderedDescending;
+                else if([date1 compare:date2]==NSOrderedDescending) return NSOrderedAscending;
+                
+                return NSOrderedSame;
+            }];
+            [self.arrayManagerjobs sortUsingComparator:^NSComparisonResult(PFObject* obj1, PFObject* obj2) {
+                NSDate* date1=obj1[@"postedDate"];
+                NSDate* date2=obj2[@"postedDate"];
+                
+                if([date1 compare:date2]==NSOrderedAscending) return NSOrderedDescending;
+                else if([date1 compare:date2]==NSOrderedDescending) return NSOrderedAscending;
+                
+                return NSOrderedSame;
+            }];
+            [self.arrayPTjobs sortUsingComparator:^NSComparisonResult(PFObject* obj1, PFObject* obj2) {
+                NSDate* date1=obj1[@"postedDate"];
+                NSDate* date2=obj2[@"postedDate"];
+                
+                if([date1 compare:date2]==NSOrderedAscending) return NSOrderedDescending;
+                else if([date1 compare:date2]==NSOrderedDescending) return NSOrderedAscending;
+                
+                return NSOrderedSame;
+            }];
+
+            [self.arrayOtherjobs sortUsingComparator:^NSComparisonResult(PFObject* obj1, PFObject* obj2) {
+                NSDate* date1=obj1[@"postedDate"];
+                NSDate* date2=obj2[@"postedDate"];
+                
+                if([date1 compare:date2]==NSOrderedAscending) return NSOrderedDescending;
+                else if([date1 compare:date2]==NSOrderedDescending) return NSOrderedAscending;
+                
+                return NSOrderedSame;
+            }];
+            
             [self.loadingIndicator setHidden:true];
 
             [self.tableView reloadData];
