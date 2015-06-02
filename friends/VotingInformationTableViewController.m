@@ -62,8 +62,8 @@
         UILabel* lblVoted=[[UILabel alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 50)];
         lblVoted.numberOfLines=0;
         Boolean voted=[[NSUserDefaults standardUserDefaults] boolForKey:VotedKey];
-    
-        lblVoted.text=voted?@"您已投票。":@"您尚未投票\n投票至7/30 24:00";
+        
+        lblVoted.text=voted?@"您已投票。":@"您尚未投票\n投票至7/3 24:00";
         lblVoted.textAlignment=NSTextAlignmentCenter;
         lblVoted.textColor=voted?[UIColor darkGrayColor]:[UIColor redColor];
         UIView* headerView=[[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 50)];
@@ -93,6 +93,7 @@
             break;
     }
     Boolean voted=[[NSUserDefaults standardUserDefaults] boolForKey:VotedKey];
+
     if(voted) return 0;
     return self.hasLoaded?1:0;
 }
