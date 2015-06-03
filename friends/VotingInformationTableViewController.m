@@ -45,7 +45,11 @@
     
     [qurey findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
         if(!error){
-            self.arrayCandidate=[objects copy];
+            
+            self.arrayCandidate=[[objects copy] sortedArrayUsingComparator:^NSComparisonResult(PFObject* obj1, PFObject* obj2) {
+                return [obj1[@"Number"] compare:obj2[@"Number"]];
+            }];
+            
             [self.tableView setScrollEnabled:TRUE];
             [self.loadingIndicator setHidden:TRUE];
             self.hasLoaded=TRUE;

@@ -121,6 +121,7 @@
         }
         
         cell.textLabel.text=[self.arrayPolitics objectAtIndex:indexPath.row];
+        [cell.textLabel setFont:[UIFont systemFontOfSize:14]];
         cell.selectionStyle=UITableViewCellSelectionStyleNone;
         
         return cell;
